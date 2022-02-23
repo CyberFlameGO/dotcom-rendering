@@ -7,7 +7,8 @@ const {
 	getContentFromURLMiddleware,
 } = require('../../src/server/lib/get-content-from-url');
 
-const port = 3030;
+const port = process.env.PORT || 3030;
+const host = process.env.HOST || 'localhost';
 
 console.log(
 	`${chalk.dim('DEV server running on')} ${chalk.blue.underline(
@@ -26,6 +27,7 @@ module.exports = {
 			overlay: true,
 		},
 		port,
+		allowedHosts: host,
 		static: {
 			directory: path.join(__dirname, '..', '..', 'src', 'static'),
 			publicPath: '/static/frontend',
@@ -34,8 +36,8 @@ module.exports = {
 			publicPath: '/assets/',
 			serverSideRender: true,
 			headers: (req, res) => {
-				// Allow any localhost request from accessing the assets
-				if (req.hostname === 'localhost' && req.headers.origin)
+				// Allow any localhost (or specified host) request from accessing the assets
+				if (req.hostname === host && req.headers.origin)
 					res.setHeader(
 						'Access-Control-Allow-Origin',
 						req.headers.origin,
