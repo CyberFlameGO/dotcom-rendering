@@ -19,11 +19,14 @@ const maybeWipeUserData = async (
 	apiKey?: string,
 	brazeUuid?: null | string,
 	consent?: boolean,
+	brazeSwitch?: boolean,
 ): Promise<void> => {
-	const userHasLoggedOut = !brazeUuid && hasCurrentBrazeUser();
-	const userHasRemovedConsent = !consent && hasCurrentBrazeUser();
+	const hasCurrentBrazeUserValue = hasCurrentBrazeUser();
+	const userHasLoggedOut = !brazeUuid && hasCurrentBrazeUserValue;
+	const userHasRemovedConsent = !consent && hasCurrentBrazeUserValue;
+	const brazeHasBeenDisabled = !brazeSwitch && hasCurrentBrazeUserValue;
 
-	if (userHasLoggedOut || userHasRemovedConsent) {
+	if (userHasLoggedOut || userHasRemovedConsent || brazeHasBeenDisabled) {
 		try {
 			if (apiKey) {
 				const appboy = await getInitialisedAppboy(apiKey);
@@ -67,6 +70,7 @@ export const buildBrazeMessages = async (
 			data.apiKey as string | undefined,
 			data.brazeUuid as string | null | undefined,
 			data.consent as boolean | undefined,
+			data.brazeSwitch as boolean | undefined,
 		);
 
 		return new NullBrazeMessages();
