@@ -87,8 +87,14 @@ const metadataWrapperStyles = (format: ArticleFormat): SerializedStyles => {
 	}
 };
 
-const keyEventsWrapperStyles = css`
+const keyEventsWrapperStyles = (hideMobile: boolean): SerializedStyles => css`
+	${hideMobile &&
+	css`
+		display: none;
+	`}
+
 	${from.desktop} {
+		display: block;
 		position: sticky;
 		top: 10px;
 		margin-bottom: 12px;
@@ -127,6 +133,9 @@ const Live: FC<Props> = ({ item }) => {
 			older={toNullable(item.pagedBlocks.pagination.older)}
 		/>
 	);
+
+	const keyEventBlocks = keyEvents(item.blocks);
+
 	return (
 		<article
 			className="js-article"
@@ -141,10 +150,14 @@ const Live: FC<Props> = ({ item }) => {
 						<Metadata item={item} />
 					</div>
 				</GridItem>
+
 				<GridItem area="key-events">
-					<div css={keyEventsWrapperStyles} data-chromatic="ignore">
+					<div
+						css={keyEventsWrapperStyles(keyEventBlocks.length < 1)}
+						data-chromatic="ignore"
+					>
 						<KeyEvents
-							keyEvents={keyEvents(item.blocks)}
+							keyEvents={keyEventBlocks}
 							format={item}
 							supportsDarkMode
 						/>
