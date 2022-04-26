@@ -29,12 +29,7 @@ type TagPair = [name: string, tag: string];
 const getOphanComponents = (html: string, tag: OphanAttribute): TagPair[] =>
 	[...html.matchAll(tagMatch(tag))].map((match) => [match[2], match[1]]);
 
-const issues: Record<OphanAttribute, number> = {
-	"data-link-name": 4692,
-	"data-component": 4698,
-};
-
-const updateIssue = async (attribute: OphanAttribute) => {
+const updateIssue = async (attribute: OphanAttribute, issue_number: number) => {
 	const frontend = getOphanComponents(html.frontend, attribute);
 	const dcr = getOphanComponents(html.dcr, attribute);
 
@@ -135,8 +130,6 @@ ${
 }
 `;
 
-	const issue_number = issues[attribute];
-
 	await octokit.request("PATCH /repos/{owner}/{repo}/issues/{issue_number}", {
 		owner: "guardian",
 		repo: "dotcom-rendering",
@@ -150,5 +143,5 @@ ${
 	);
 };
 
-await updateIssue("data-component");
-await updateIssue("data-link-name");
+await updateIssue("data-component", 4698);
+await updateIssue("data-link-name", 4692);
