@@ -10,11 +10,11 @@ import {
 	remSpace,
 } from '@guardian/source-foundations';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
-import ArticleBody from 'components/articleBody';
+import ArticleBody from 'components/ArticleBody';
 import Byline from 'components/byline';
 import Cutout from 'components/cutout';
 import Footer from 'components/footer';
-import Headline from 'components/headline';
+import Headline from 'components/Headline';
 import Logo from 'components/logo';
 import Metadata from 'components/metadata';
 import RelatedContent from 'components/relatedContent';

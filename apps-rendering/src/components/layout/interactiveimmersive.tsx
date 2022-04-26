@@ -8,10 +8,10 @@ import {
 	neutral,
 } from '@guardian/source-foundations';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
-import Body from 'components/articleBody';
+import Body from 'components/ArticleBody';
 import Epic from 'components/epic';
 import Footer from 'components/footer';
-import Headline from 'components/headline';
+import Headline from 'components/Headline';
 import ImmersiveCaption from 'components/immersiveCaption';
 import Logo from 'components/logo';
 import Metadata from 'components/metadata';

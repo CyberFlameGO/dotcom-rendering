@@ -48,7 +48,7 @@ import type {
 	Text,
 	TimelineAtom as TimelineAtomElement,
 } from 'bodyElement';
-import Anchor from 'components/anchor';
+import Anchor from 'components/Anchor';
 import Quiz from 'components/atoms/quiz';
 import Blockquote from 'components/blockquote';
 import Bullet from 'components/bullet';

@@ -16,7 +16,7 @@ import {
 	Lines,
 	ToggleSwitch,
 } from '@guardian/source-react-components-development-kitchen';
-import Avatar from 'components/avatar';
+import Avatar from 'components/Avatar';
 import Byline from 'components/byline';
 import CommentCount from 'components/commentCount';
 import Dateline from 'components/dateline';
